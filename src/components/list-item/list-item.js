@@ -7,46 +7,51 @@ import "./list-item.styles.scss";
 import { onEnterOrSpace } from "../../a11y";
 
 export const ListItem = ({
-  title,
-  active,
-  hasNext,
-  value,
-  onClick,
-  nonOption
+    title,
+    active,
+    hasNext,
+    value,
+    onClick,
+    nonOption
 }) => {
-  return (
-    <div
-      role="listitem"
-      tabIndex={0}
-      className={classNames("__list-item", {
-        "__list-item--active": active && !nonOption,
-        "__list-item--non-option": nonOption
-      })}
-      onClick={() => onClick && onClick(value)}
-      onKeyPress={onEnterOrSpace(() => onClick && onClick(value))}
-    >
-      <div className="__list-item__left-side">{!nonOption && <Tick />}</div>
-      <div className="__list-item__content">{title}</div>
-      {hasNext && (
-        <div className="__list-item__right-side">
-          <ArrowRight />
-        </div>
-      )}
-    </div>
-  );
+    return ( <
+        li role = "listitem"
+        tabIndex = { 0 }
+        className = {
+            classNames("__list-item", {
+                "__list-item--active": active && !nonOption,
+                "__list-item--non-option": nonOption
+            })
+        }
+        onClick = {
+            () => onClick && onClick(value) }
+        onKeyPress = { onEnterOrSpace(() => onClick && onClick(value)) } >
+        <
+        div className = "__list-item__left-side" > {!nonOption && < Tick / > } < /div> <
+        div className = "__list-item__content" > { title } < /div> {
+            hasNext && ( <
+                div className = "__list-item__right-side" >
+                <
+                ArrowRight / >
+                <
+                /div>
+            )
+        } <
+        /li>
+    );
 };
 
 ListItem.defaultProps = {
-  active: false,
-  nonOption: false,
-  hasNext: false
+    active: false,
+    nonOption: false,
+    hasNext: false
 };
 
 ListItem.propTypes = {
-  title: PropTypes.string.isRequired,
-  value: PropTypes.object,
-  active: PropTypes.bool,
-  hasNext: PropTypes.bool,
-  nonOption: PropTypes.bool,
-  onClick: PropTypes.func
+    title: PropTypes.string.isRequired,
+    value: PropTypes.object,
+    active: PropTypes.bool,
+    hasNext: PropTypes.bool,
+    nonOption: PropTypes.bool,
+    onClick: PropTypes.func
 };

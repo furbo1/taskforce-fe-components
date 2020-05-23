@@ -6,40 +6,46 @@ import "./accordion.scss";
 import { onEnterOrSpace } from "../../a11y";
 
 export const Accordion = ({ title, content, children }) => {
-  const [showContent, setShowContent] = useState(false);
+    const [showContent, setShowContent] = useState(false);
 
-  return (
-    <div className="message __accordion">
-      <div
-        tabIndex={0}
-        className={classNames("message-header __accordion-header", {
-          "__accordion-header--expanded": showContent
-        })}
-        onClick={() => setShowContent(!showContent)}
-        onKeyPress={onEnterOrSpace(() => setShowContent(!showContent))}
-      >
-        <span className="__accordion-title">{title}</span>
-        <div className="__accordion-arrow">
-          <ArrowDown />
-        </div>
-      </div>
-      {showContent && (
-        <div className="message-body">
-          <div className="content">{children || content}</div>
-        </div>
-      )}
-    </div>
-  );
+    return ( < div className = "message __accordion"
+        accessKey = "tab" >
+        <
+        div tabIndex = { 0 }
+        className = {
+            classNames("message-header __accordion-header", {
+                "__accordion-header--expanded": showContent
+            })
+        }
+        onClick = {
+            () => setShowContent(!showContent)
+        }
+        onKeyPress = { onEnterOrSpace(() => setShowContent(!showContent)) } >
+        <
+        span className = "__accordion-title" > { title } < /span>   <
+        div className = "__accordion-arrow" >
+        <
+        ArrowDown / >
+        <
+        /div>    < /
+        div > {
+            showContent && ( < div className = "message-body" >
+                <
+                div className = "content" > { children || content } < /div>  < /
+                div >
+            )
+        } < /div>
+    );
 };
 
 Accordion.propTypes = {
-  title: PropTypes.string.isRequired,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]),
-  content: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ])
+    title: PropTypes.string.isRequired,
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
+    ]),
+    content: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
+    ])
 };
